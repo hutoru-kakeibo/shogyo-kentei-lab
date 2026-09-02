@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans JP", "Hiragino Maru Gothic ProN", "Hiragino Sans",
+    "Yu Gothic UI", "Yu Gothic", system-ui, sans-serif;
+
+  /* ブランドカラー（メイン：Funda簿記を参考にしたブルー系） */
+  --color-brand-50: #eaf7ff;
+  --color-brand-100: #d0eefc;
+  --color-brand-300: #40b9ed;
+  --color-brand-500: #00a2e7;
+  --color-brand-700: #0073be;
+  --color-brand-900: #045a94;
+
+  /* アクセントカラー（CTA用のオレンジ） */
+  --color-accent-100: #ffedd5;
+  --color-accent-400: #ffae40;
+  --color-accent-500: #ff9f1f;
+  --color-accent-700: #7d501e;
+
+  /* ハイライトカラー（チェックリストなど、ワンポイントの強調用） */
+  --color-highlight-400: #ffd84d;
+
+  --color-surface: #ffffff;
+  --color-canvas: #eaf7ff;
+  --color-ink: #1f2937;
+  --color-ink-muted: #6b7280;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* ホームインジケータ（iPhoneの下部余白）分の余白を足す */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 横スクロールカルーセルのスクロールバーを見た目から消す */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
