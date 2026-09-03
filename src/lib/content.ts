@@ -115,112 +115,11 @@ export const pricingModes = [
 
 export type PricingModeKey = (typeof pricingModes)[number]["key"];
 
-export const individualSubjects = [
-  {
-    slug: "zensho-boki",
-    name: "全商簿記",
-    description: "全国商業高等学校協会主催の簿記実務検定に対応。仕訳から決算までを段階的に学べます。",
-    points: [
-      "1級〜3級それぞれの出題範囲に対応した講座構成",
-      "頻出の仕訳パターンを繰り返し演習",
-      "本番形式の模擬問題で得点力を確認",
-    ],
-  },
-  {
-    slug: "nissho-boki",
-    name: "日商簿記",
-    description: "日本商工会議所主催の簿記検定に対応。就職・進学でも評価されやすい資格です。",
-    points: [
-      "全商簿記との違いを踏まえたカリキュラム",
-      "工業簿記・商業簿記の両方をカバー",
-      "過去問演習で出題傾向を把握",
-    ],
-  },
-  {
-    slug: "zensho-eiken",
-    name: "全商英検",
-    description: "商業高校生向けの英語検定に対応。ビジネス英語の基礎から対策します。",
-    points: [
-      "ビジネスシーンでよく使う英単語・表現を重点学習",
-      "リスニング・筆記の両方をバランスよく対策",
-      "級別に出題傾向を分析した演習問題",
-    ],
-  },
-  {
-    slug: "business-joho",
-    name: "ビジネス情報",
-    description: "ビジネス情報関連の検定に対応。情報処理の基礎知識と実務での活用力を身につけます。",
-    points: [
-      "情報処理の基礎用語をわかりやすく解説",
-      "表計算・データ処理の実践演習",
-      "検定の出題形式に沿った模擬問題",
-    ],
-  },
-  {
-    slug: "programming",
-    name: "プログラミング",
-    description: "商業高校で扱うプログラミング関連の検定・授業内容に対応します。",
-    points: [
-      "プログラミングの基礎概念からスタート",
-      "検定でよく問われるアルゴリズムを演習",
-      "つまずきやすいポイントをチャットで質問可能",
-    ],
-  },
-  {
-    slug: "bunsho-sakusei",
-    name: "文書作成",
-    description: "ビジネス文書実務検定に対応。ビジネス文書の基本ルールと実務スキルを学びます。",
-    points: [
-      "社内文書・社外文書の書き方の基本",
-      "実際の検定形式に沿った作成演習",
-      "よくある減点ポイントを重点的に解説",
-    ],
-  },
-  {
-    slug: "dentaku-jitsumu",
-    name: "電卓実務",
-    description: "珠算・電卓実務検定に対応。スピードと正確さの両方を鍛えます。",
-    points: [
-      "見取算・乗算・除算の基礎から演習",
-      "制限時間内で解くためのコツを解説",
-      "級別の出題パターンに合わせた練習問題",
-    ],
-  },
-  {
-    slug: "zaimu-shohyo-bunseki",
-    name: "財務諸表分析",
-    description: "財務諸表分析に関する検定・授業内容に対応。決算書の読み方を基礎から学びます。",
-    points: [
-      "貸借対照表・損益計算書の基本の読み方",
-      "経営指標を使った分析方法を解説",
-      "実際の企業の決算書を使った演習",
-    ],
-  },
-] as const;
+export const successProfilesComingSoonMessage =
+  "合格プロフィールは只今準備中です。近日公開予定ですのでお楽しみに。";
 
-export type IndividualSubject = (typeof individualSubjects)[number];
-
-export const pricingComingSoonMessage =
-  "集団クラスは只今準備中です。近日公開予定ですのでお楽しみに。";
-
-// 個別科目の料金プラン（科目共通・時間制、利用期間の定めなし）
-export const courseTicketPricing = {
-  courseLabel: "個別指導",
-  chatSupportPrice: "5,000",
-};
-
-// 級ごとの時間単価（科目共通）
-export const courseGradePricing = [
-  { grade: "3級", hourlyPrice: "3,000" },
-  { grade: "2級", hourlyPrice: "3,500" },
-  { grade: "1級", hourlyPrice: "4,000" },
-];
-
-// トレーニング内容の共通ステップ（先頭に科目固有のpointsが入る）
-export const courseTrainingTailSteps = ["頻出パターンの総復習", "本番形式の模擬試験に挑戦"];
-
-// 合格体験記（科目共通のプレースホルダー。実データが決まり次第差し替え）
-export const successProfiles = [
+// 合格体験記のデフォルトテンプレート（科目ごとのプレースホルダー。実データが決まり次第差し替え）
+const defaultSuccessProfiles = [
   {
     tag: "合格！",
     name: "H.O. さん",
@@ -246,6 +145,219 @@ export const successProfiles = [
     materials: "商業検定ラボの講座のみ",
   },
 ];
+
+export const individualSubjects = [
+  {
+    slug: "zensho-boki",
+    name: "全商簿記",
+    description: "全国商業高等学校協会主催の簿記実務検定に対応。仕訳から決算までを段階的に学べます。",
+    points: [
+      "1級〜3級それぞれの出題範囲に対応した講座構成",
+      "頻出の仕訳パターンを繰り返し演習",
+      "本番形式の模擬問題で得点力を確認",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "全商簿記の基礎を理解する",
+      "1級〜3級それぞれの出題範囲に対応した講座構成",
+      "頻出の仕訳パターンを繰り返し演習",
+      "本番形式の模擬問題で得点力を確認",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+  {
+    slug: "nissho-boki",
+    name: "日商簿記",
+    description: "日本商工会議所主催の簿記検定に対応。就職・進学でも評価されやすい資格です。",
+    points: [
+      "全商簿記との違いを踏まえたカリキュラム",
+      "工業簿記・商業簿記の両方をカバー",
+      "過去問演習で出題傾向を把握",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "日商簿記の基礎を理解する",
+      "全商簿記との違いを踏まえたカリキュラム",
+      "工業簿記・商業簿記の両方をカバー",
+      "過去問演習で出題傾向を把握",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+  {
+    slug: "zensho-eiken",
+    name: "全商英検",
+    description: "商業高校生向けの英語検定に対応。ビジネス英語の基礎から対策します。",
+    points: [
+      "ビジネスシーンでよく使う英単語・表現を重点学習",
+      "リスニング・筆記の両方をバランスよく対策",
+      "級別に出題傾向を分析した演習問題",
+    ],
+    available: true,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "2,800" },
+      { grade: "2級", hourlyPrice: "3,000" },
+      { grade: "1級", hourlyPrice: "3,200" },
+    ],
+    trainingModules: [
+      "過去問を一緒に解く",
+      "持ち込み問題の解説",
+      "勉強法やスケジュールについての相談",
+      "英語の起源や単語の意味など本質的な指導",
+      "頻出パターンの総復習",
+    ],
+    successProfiles: [],
+  },
+  {
+    slug: "business-joho",
+    name: "ビジネス情報",
+    description: "ビジネス情報関連の検定に対応。情報処理の基礎知識と実務での活用力を身につけます。",
+    points: [
+      "情報処理の基礎用語をわかりやすく解説",
+      "表計算・データ処理の実践演習",
+      "検定の出題形式に沿った模擬問題",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "ビジネス情報の基礎を理解する",
+      "情報処理の基礎用語をわかりやすく解説",
+      "表計算・データ処理の実践演習",
+      "検定の出題形式に沿った模擬問題",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+  {
+    slug: "programming",
+    name: "プログラミング",
+    description: "商業高校で扱うプログラミング関連の検定・授業内容に対応します。",
+    points: [
+      "プログラミングの基礎概念からスタート",
+      "検定でよく問われるアルゴリズムを演習",
+      "つまずきやすいポイントをチャットで質問可能",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "プログラミングの基礎を理解する",
+      "プログラミングの基礎概念からスタート",
+      "検定でよく問われるアルゴリズムを演習",
+      "つまずきやすいポイントをチャットで質問可能",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+  {
+    slug: "bunsho-sakusei",
+    name: "文書作成",
+    description: "ビジネス文書実務検定に対応。ビジネス文書の基本ルールと実務スキルを学びます。",
+    points: [
+      "社内文書・社外文書の書き方の基本",
+      "実際の検定形式に沿った作成演習",
+      "よくある減点ポイントを重点的に解説",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "文書作成の基礎を理解する",
+      "社内文書・社外文書の書き方の基本",
+      "実際の検定形式に沿った作成演習",
+      "よくある減点ポイントを重点的に解説",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+  {
+    slug: "dentaku-jitsumu",
+    name: "電卓実務",
+    description: "珠算・電卓実務検定に対応。スピードと正確さの両方を鍛えます。",
+    points: [
+      "見取算・乗算・除算の基礎から演習",
+      "制限時間内で解くためのコツを解説",
+      "級別の出題パターンに合わせた練習問題",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "電卓実務の基礎を理解する",
+      "見取算・乗算・除算の基礎から演習",
+      "制限時間内で解くためのコツを解説",
+      "級別の出題パターンに合わせた練習問題",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+  {
+    slug: "zaimu-shohyo-bunseki",
+    name: "財務諸表分析",
+    description: "財務諸表分析に関する検定・授業内容に対応。決算書の読み方を基礎から学びます。",
+    points: [
+      "貸借対照表・損益計算書の基本の読み方",
+      "経営指標を使った分析方法を解説",
+      "実際の企業の決算書を使った演習",
+    ],
+    available: false,
+    gradePricing: [
+      { grade: "3級", hourlyPrice: "3,000" },
+      { grade: "2級", hourlyPrice: "3,500" },
+      { grade: "1級", hourlyPrice: "4,000" },
+    ],
+    trainingModules: [
+      "財務諸表分析の基礎を理解する",
+      "貸借対照表・損益計算書の基本の読み方",
+      "経営指標を使った分析方法を解説",
+      "実際の企業の決算書を使った演習",
+      "頻出パターンの総復習",
+      "本番形式の模擬試験に挑戦",
+    ],
+    successProfiles: defaultSuccessProfiles,
+  },
+] as const;
+
+export type IndividualSubject = (typeof individualSubjects)[number];
+
+export const pricingComingSoonMessage =
+  "集団クラスは只今準備中です。近日公開予定ですのでお楽しみに。";
+
+// 個別科目の料金プラン（科目共通・時間制、利用期間の定めなし）
+export const courseTicketPricing = {
+  courseLabel: "個別指導",
+  chatSupportPrice: "5,000",
+};
 
 export const faqs = [
   {

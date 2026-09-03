@@ -7,24 +7,19 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { ClosingCta } from "@/components/sections/ClosingCta";
-import { StickyCta } from "@/components/layout/StickyCta";
-import { hero } from "@/lib/content";
 
 export default function Home() {
   return (
-    <>
-      <main className="pb-24">
-        <Hero />
-        <TrialContent />
-        <PainPoints />
-        <SolutionIntro />
-        <Features />
-        <Testimonials />
-        <Pricing />
-        <Faq />
-        <ClosingCta />
-      </main>
-      <StickyCta label={hero.ctaLabel} />
-    </>
+    <main>
+      <Hero />
+      <TrialContent />
+      <PainPoints />
+      <SolutionIntro />
+      <Features />
+      <Testimonials />
+      <Pricing />
+      <Faq />
+      <ClosingCta />
+    </main>
   );
 }

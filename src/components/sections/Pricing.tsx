@@ -48,16 +48,29 @@ export function Pricing() {
           </p>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
-            {individualSubjects.map((subject) => (
-              <Link
-                key={subject.slug}
-                href={`/subjects/${subject.slug}`}
-                className="flex items-center justify-between gap-1 rounded-2xl border border-gray-200 bg-white p-4 text-sm font-bold text-ink transition-colors active:bg-brand-50"
-              >
-                {subject.name}
-                <ChevronRight size={16} className="shrink-0 text-brand-500" />
-              </Link>
-            ))}
+            {individualSubjects.map((subject) =>
+              subject.available ? (
+                <Link
+                  key={subject.slug}
+                  href={`/subjects/${subject.slug}`}
+                  className="flex items-center justify-between gap-1 rounded-2xl border border-gray-200 bg-white p-4 text-sm font-bold text-ink transition-colors active:bg-brand-50"
+                >
+                  {subject.name}
+                  <ChevronRight size={16} className="shrink-0 text-brand-500" />
+                </Link>
+              ) : (
+                <div
+                  key={subject.slug}
+                  aria-disabled="true"
+                  className="flex flex-col items-start gap-1 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-sm font-bold text-gray-400"
+                >
+                  {subject.name}
+                  <span className="rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-bold text-gray-500">
+                    準備中
+                  </span>
+                </div>
+              ),
+            )}
           </div>
 
           <PopButton href="#apply" fullWidth className="mt-6">

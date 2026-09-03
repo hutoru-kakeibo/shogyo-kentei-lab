@@ -7,12 +7,9 @@ import {
   individualSubjects,
   siteMeta,
   courseTicketPricing,
-  courseGradePricing,
-  courseTrainingTailSteps,
-  successProfiles,
+  successProfilesComingSoonMessage,
 } from "@/lib/content";
 import { PopButton } from "@/components/ui/PopButton";
-import { StickyCta } from "@/components/layout/StickyCta";
 import { AccordionItem } from "@/components/ui/Accordion";
 import { FadeIn } from "@/components/ui/FadeIn";
 
@@ -44,16 +41,9 @@ export default async function SubjectDetailPage({
   const subject = individualSubjects.find((s) => s.slug === slug);
   if (!subject) notFound();
 
-  const trainingModules = [
-    `${subject.name}の基礎を理解する`,
-    ...subject.points,
-    ...courseTrainingTailSteps,
-  ];
-
   return (
-    <>
-      <main className="pb-24">
-        {/* ヘッダー */}
+    <main>
+      {/* ヘッダー */}
         <section className="bg-gradient-to-b from-brand-100 via-brand-50 to-canvas px-5 pt-8 pb-6">
           <Link
             href="/#pricing"
@@ -141,7 +131,7 @@ export default async function SubjectDetailPage({
                 {subject.name} {courseTicketPricing.courseLabel}
               </p>
               <ul className="mt-4 divide-y divide-gray-100">
-                {courseGradePricing.map((tier) => (
+                {subject.gradePricing.map((tier) => (
                   <li key={tier.grade} className="flex items-baseline justify-between py-2.5">
                     <span className="text-sm font-bold text-ink">{tier.grade}</span>
                     <span className="flex items-baseline gap-1">
@@ -154,16 +144,6 @@ export default async function SubjectDetailPage({
                 ))}
               </ul>
             </div>
-          </FadeIn>
-
-          <FadeIn delay={0.1}>
-            <p className="mt-4 text-sm font-bold text-ink">
-              <span className="text-brand-500">★</span> チャットサポート：+¥
-              {courseTicketPricing.chatSupportPrice}
-            </p>
-            <p className="mt-6 text-center text-sm font-bold text-ink">
-              利用期間の定めはありません。必要な分だけご利用いただけます。
-            </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
@@ -183,7 +163,7 @@ export default async function SubjectDetailPage({
           </FadeIn>
 
           <div className="mt-6 space-y-3">
-            {trainingModules.map((step, i) => (
+            {subject.trainingModules.map((step, i) => (
               <FadeIn key={step} delay={i * 0.04}>
                 <AccordionItem question={`【${i + 1}】 ${step}`} answer={`${step}を学びます。`} />
               </FadeIn>
@@ -197,50 +177,67 @@ export default async function SubjectDetailPage({
             <h2 className="text-center text-xl font-extrabold text-white">合格プロフィール</h2>
           </FadeIn>
 
-          <div className="mt-6 space-y-5">
-            {successProfiles.map((profile, i) => (
-              <FadeIn key={profile.name} delay={i * 0.08}>
-                <div className="rounded-3xl border-2 border-white bg-white/95 p-5 shadow-lg">
-                  <span className="inline-block rounded bg-highlight-400 px-2 py-0.5 text-sm font-extrabold text-ink underline decoration-accent-500 decoration-4">
-                    {profile.tag}
-                  </span>
+          {subject.successProfiles.length > 0 ? (
+            <div className="mt-6 space-y-5">
+              {subject.successProfiles.map((profile, i) => (
+                <FadeIn key={profile.name} delay={i * 0.08}>
+                  <div className="rounded-3xl border-2 border-white bg-white/95 p-5 shadow-lg">
+                    <span className="inline-block rounded bg-highlight-400 px-2 py-0.5 text-sm font-extrabold text-ink underline decoration-accent-500 decoration-4">
+                      {profile.tag}
+                    </span>
 
-                  <div className="mt-3 flex items-center gap-3">
-                    <Image
-                      src={profile.avatar}
-                      alt=""
-                      width={48}
-                      height={48}
-                      className="h-12 w-12 shrink-0 rounded-full border-2 border-brand-100 object-cover object-top"
-                    />
-                    <div>
-                      <p className="text-sm font-extrabold text-ink">{profile.name}</p>
-                      <p className="text-xs text-ink-muted">{profile.role}</p>
+                    <div className="mt-3 flex items-center gap-3">
+                      <Image
+                        src={profile.avatar}
+                        alt=""
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 shrink-0 rounded-full border-2 border-brand-100 object-cover object-top"
+                      />
+                      <div>
+                        <p className="text-sm font-extrabold text-ink">{profile.name}</p>
+                        <p className="text-xs text-ink-muted">{profile.role}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid grid-cols-2 gap-y-2 border-t border-gray-100 pt-4 text-sm text-ink">
+                      <p>
+                        合計時間{" "}
+                        <span className="font-extrabold text-brand-700">{profile.totalHours}</span>h
+                      </p>
+                      <p>
+                        模擬最高点{" "}
+                        <span className="font-extrabold text-brand-700">
+                          {profile.mockBestScore}
+                        </span>
+                        点
+                      </p>
+                      <p>
+                        合計日数{" "}
+                        <span className="font-extrabold text-brand-700">{profile.totalDays}</span>日
+                      </p>
+                      <p>
+                        模擬試験回数{" "}
+                        <span className="font-extrabold text-brand-700">{profile.mockCount}</span>回
+                      </p>
+                    </div>
+                    <div className="mt-3 space-y-1 border-t border-gray-100 pt-3 text-xs text-ink-muted">
+                      <p>スタイル：{profile.style}</p>
+                      <p>学習教材：{profile.materials}</p>
                     </div>
                   </div>
-
-                  <div className="mt-4 grid grid-cols-2 gap-y-2 border-t border-gray-100 pt-4 text-sm text-ink">
-                    <p>
-                      合計時間 <span className="font-extrabold text-brand-700">{profile.totalHours}</span>h
-                    </p>
-                    <p>
-                      模擬最高点 <span className="font-extrabold text-brand-700">{profile.mockBestScore}</span>点
-                    </p>
-                    <p>
-                      合計日数 <span className="font-extrabold text-brand-700">{profile.totalDays}</span>日
-                    </p>
-                    <p>
-                      模擬試験回数 <span className="font-extrabold text-brand-700">{profile.mockCount}</span>回
-                    </p>
-                  </div>
-                  <div className="mt-3 space-y-1 border-t border-gray-100 pt-3 text-xs text-ink-muted">
-                    <p>スタイル：{profile.style}</p>
-                    <p>学習教材：{profile.materials}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+                </FadeIn>
+              ))}
+            </div>
+          ) : (
+            <FadeIn delay={0.05}>
+              <div className="mt-6 rounded-3xl border-2 border-white bg-white/95 px-5 py-14 text-center">
+                <p className="text-sm leading-relaxed font-bold text-ink-muted">
+                  {successProfilesComingSoonMessage}
+                </p>
+              </div>
+            </FadeIn>
+          )}
         </section>
 
         <section className="bg-canvas px-5 py-10">
@@ -248,8 +245,7 @@ export default async function SubjectDetailPage({
             無料体験に申し込む
           </PopButton>
         </section>
-      </main>
-      <StickyCta label="無料体験に申し込む" href="/#apply" />
-    </>
+    </main>
   );
 }
+

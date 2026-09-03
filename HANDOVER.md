@@ -11,8 +11,9 @@
 | コンセプト | 商業高校生専門のオンライン検定対策塾のLP（ランディングページ） |
 | 参考にしたデザイン | [Funda簿記 Webトレーニング](https://lp.boki.funda.jp/)（配色・UI/UXの構造を参考に、コンテンツは独自） |
 | 技術スタック | Next.js 16 (App Router / Turbopack) + TypeScript + Tailwind CSS v4 + Framer Motion + Lucide React |
-| デプロイ状況 | **未デプロイ**。ローカル開発のみ（`npm run dev`）で確認してきた。本番URLはまだ存在しない |
-| GitHub / Vercel | **未設定**。このディレクトリは今回の引き継ぎ準備で初めてgit管理下に置いた |
+| デプロイ状況 | **GitHub連携まで完了、Vercelは未接続**（本番URLはまだ存在しない）。詳細は §6 参照 |
+| GitHub | [hutoru-kakeibo/shogyo-kentei-lab](https://github.com/hutoru-kakeibo/shogyo-kentei-lab)（public）。`main`ブランチにpush済み |
+| Vercel | 未接続。ユーザーがダッシュボードからGitHubリポジトリをインポートする手順を案内済み、実施待ち |
 
 このプロジェクトはユーザーの指示に沿って対話的にLPを組み立ててきたもので、要件定義書やデザインカンプは存在しない。**このファイルと`src/lib/content.ts`のコメントが仕様書代わり**になっている。
 
@@ -62,11 +63,13 @@ website/
 |---|---|---|
 | 統計数値（合格件数15件+、合格率92%） | 仮の数値 | `hero.stats` |
 | 利用者の声（T/M/Kさん） | 架空の口コミ3件 | `testimonials` |
-| 料金（個別・級ごとの時間単価） | 3級¥3,000／2級¥3,500／1級¥4,000/時間（全科目共通の仮単価） | `courseGradePricing` |
-| チャットサポート追加料金 | ¥5,000（仮） | `courseTicketPricing.chatSupportPrice` |
+| 個別科目：公開状況 | **「全商英検」のみ`available: true`（公開・タップ可）。残り7科目は`available: false`で「準備中」表示・タップ不可** | `individualSubjects[].available` |
+| 個別科目：料金（級ごとの時間単価） | 科目ごとに`gradePricing`で個別設定可能。全商英検のみ実額（3級¥2,800／2級¥3,000／1級¥3,200）、他7科目は仮単価（3,000／3,500／4,000円） | `individualSubjects[].gradePricing` |
+| 個別科目：トレーニング内容 | 科目ごとに`trainingModules`で個別設定可能。全商英検のみユーザー確定済みの5項目、他7科目は一般論ベースの仮テキスト6項目 | `individualSubjects[].trainingModules` |
+| 個別科目：説明文・学習ポイント | 一般論ベースの仮テキスト（全8科目共通で未確定） | `individualSubjects[].description` / `.points` |
+| チャットサポート追加料金 | ¥5,000（仮、全科目共通） | `courseTicketPricing.chatSupportPrice` |
 | 「集団」タブ | 中身なし、「準備中」メッセージのみ | `pricingComingSoonMessage` |
-| 8科目の説明文・学習ポイント・トレーニング内容 | 一般論ベースの仮テキスト | `individualSubjects` |
-| 合格プロフィール（H.O.さん／T.K.さん） | 全8科目で共通の架空プロフィール2件 | `successProfiles` |
+| 合格プロフィール | 科目ごとに`successProfiles`で個別設定可能。**全商英検は空配列＝「準備中」表示**。他7科目は共通の架空プロフィール2件（`defaultSuccessProfiles`） | `individualSubjects[].successProfiles` |
 | トライアルコンテンツ3例 | 実際に体験できるツールへのリンクなし（デザインのみ） | `trial.items` |
 | 「無料コンテンツ一覧」ボタン | リンク先 `#free-content` は実在しないダミー | `TrialContent.tsx` |
 | SolutionIntro/Features/Hero内の画像プレースホルダー | 「サービス画面のスクリーンショット」「アプリ画面イメージ」はグレーボックスのまま | `SolutionIntro.tsx` |
@@ -132,8 +135,22 @@ npm run lint    # ESLint
 
 ## 6. デプロイについて
 
-まだVercel等へのデプロイは行っていない。デプロイする場合の注意点:
+### 6.1 現在の状況
+
+- **GitHub**: 完了。[https://github.com/hutoru-kakeibo/shogyo-kentei-lab](https://github.com/hutoru-kakeibo/shogyo-kentei-lab)（public）にpush済み、`main`ブランチ
+  - リポジトリはユーザー自身がGitHubのWeb UIで作成（`gh` CLIが環境に無いことと、Claude Codeの安全機能がAPI経由でのリポジトリ自動作成をブロックしたため）
+  - push自体はローカルのGit Credential Manager（Windows）に保存済みの`hutoru-kakeibo`アカウント認証情報を使って行った。太る家計簿（`hutorukakeibo`リポジトリ）と同じ認証が使い回せている
+- **Vercel**: 未接続。以下の手順をユーザーに案内済みだが、実施報告はまだ受けていない：
+  1. https://vercel.com/new を開く（hutoru-kakeiboアカウントでログイン）
+  2. 「Import Git Repository」から `hutoru-kakeibo/shogyo-kentei-lab` を選択（一覧に出ない場合はGitHub App権限の追加が必要）
+  3. Framework Presetは自動でNext.jsと認識される想定。Root Directoryは`./`のまま
+  4. 環境変数は不要（空のままでよい）
+  5. Deployをクリック
+  - **次にこのプロジェクトを触るときは、まずVercel連携が完了したか・本番URLが発行されたかをユーザーに確認すること。**
+
+### 6.2 デプロイ時の注意点
 
 - 画像ファイル名は小文字で統一している（Windows開発環境は大文字小文字を区別しないが、Vercel等Linux本番環境では区別される。過去に`Keifont.ttf`のケースで実際にこの問題が起きかけた）
 - `next/font/local`は現在未使用（§4.5参照）なので、フォント関連のビルドエラーは基本的に発生しないはず
 - 環境変数は現状なし（フォーム送信等のバックエンド機能は未実装。CTAボタンはすべて`#apply`セクションへのアンカーリンク）
+- Vercel接続後は、`main`ブランチへの`git push`で自動デプロイされるようになる（太る家計簿と同じ運用）

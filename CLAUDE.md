@@ -4,7 +4,7 @@
 > 特に「§3 未確定・プレースホルダーのコンテンツ」と「§4 ハマりどころと技術的知見」には、現状の仕様と過去に踏んだ地雷がまとまっている。
 
 商業高校生専門のオンライン検定対策塾のLP。Next.js 16 (App Router/Turbopack) + Tailwind CSS v4。
-現状はローカル開発のみで、本番デプロイはまだ行っていない。
+GitHubは[hutoru-kakeibo/shogyo-kentei-lab](https://github.com/hutoru-kakeibo/shogyo-kentei-lab)にpush済み。Vercel未接続（HANDOVER.md §6参照）。
 
 ## コマンド
 
