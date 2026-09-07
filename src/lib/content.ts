@@ -382,6 +382,12 @@ export const faqs = [
   },
 ];
 
+export const applyPage = {
+  headline: "お申し込み",
+  message: "お申し込みフォームは只今準備中です。今しばらくお待ちください。",
+  backLabel: "トップに戻る",
+};
+
 export const closing = {
   headline: "その一歩が、\n合格への最短ルートになる。",
   subCopy: "まずは無料体験で、自分に合った学び方を確かめてみませんか。",
