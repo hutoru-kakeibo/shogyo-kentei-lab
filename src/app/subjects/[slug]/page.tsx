@@ -147,7 +147,7 @@ export default async function SubjectDetailPage({
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <PopButton href="/apply" fullWidth className="mt-6">
+            <PopButton href={`/apply?subject=${subject.slug}`} fullWidth className="mt-6">
               今すぐ利用
             </PopButton>
           </FadeIn>

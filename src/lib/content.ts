@@ -384,7 +384,23 @@ export const faqs = [
 
 export const applyPage = {
   headline: "お申し込み",
-  message: "お申し込みフォームは只今準備中です。今しばらくお待ちください。",
+  intro: "必要事項をご入力のうえ、送信してください。",
+  nameLabel: "お名前",
+  namePlaceholder: "商業 太郎",
+  schoolLabel: "学校名",
+  schoolPlaceholder: "〇〇商業高等学校",
+  gradeLabel: "学年",
+  gradeOptions: ["1年", "2年", "3年", "その他"],
+  emailLabel: "メールアドレス",
+  emailPlaceholder: "example@school.jp",
+  subjectLabel: "ご希望の科目",
+  levelLabel: "ご希望の級",
+  levelOptions: ["3級", "2級", "1級", "まだ決めていない"],
+  messageLabel: "ご質問・ご要望（任意）",
+  messagePlaceholder: "気になることがあればご記入ください",
+  submitLabel: "送信する",
+  pendingNotice:
+    "只今オンラインでの送信受付システムを準備中のため、ご入力いただいた内容はまだ送信されておりません。近日公開までしばらくお待ちください。",
   backLabel: "トップに戻る",
 };
 
