@@ -11,9 +11,9 @@
 | コンセプト | 商業高校生専門のオンライン検定対策塾のLP（ランディングページ） |
 | 参考にしたデザイン | [Funda簿記 Webトレーニング](https://lp.boki.funda.jp/)（配色・UI/UXの構造を参考に、コンテンツは独自） |
 | 技術スタック | Next.js 16 (App Router / Turbopack) + TypeScript + Tailwind CSS v4 + Framer Motion + Lucide React |
-| デプロイ状況 | **GitHub連携まで完了、Vercelは未接続**（本番URLはまだ存在しない）。詳細は §6 参照 |
+| デプロイ状況 | **GitHub・Vercelともに連携完了**。本番URL: https://shogyo-kentei-lab.vercel.app/ 。詳細は §6 参照 |
 | GitHub | [hutoru-kakeibo/shogyo-kentei-lab](https://github.com/hutoru-kakeibo/shogyo-kentei-lab)（public）。`main`ブランチにpush済み |
-| Vercel | 未接続。ユーザーがダッシュボードからGitHubリポジトリをインポートする手順を案内済み、実施待ち |
+| Vercel | 連携済み。`main`へのpushで自動デプロイされる |
 
 このプロジェクトはユーザーの指示に沿って対話的にLPを組み立ててきたもので、要件定義書やデザインカンプは存在しない。**このファイルと`src/lib/content.ts`のコメントが仕様書代わり**になっている。
 
@@ -140,13 +140,9 @@ npm run lint    # ESLint
 - **GitHub**: 完了。[https://github.com/hutoru-kakeibo/shogyo-kentei-lab](https://github.com/hutoru-kakeibo/shogyo-kentei-lab)（public）にpush済み、`main`ブランチ
   - リポジトリはユーザー自身がGitHubのWeb UIで作成（`gh` CLIが環境に無いことと、Claude Codeの安全機能がAPI経由でのリポジトリ自動作成をブロックしたため）
   - push自体はローカルのGit Credential Manager（Windows）に保存済みの`hutoru-kakeibo`アカウント認証情報を使って行った。太る家計簿（`hutorukakeibo`リポジトリ）と同じ認証が使い回せている
-- **Vercel**: 未接続。以下の手順をユーザーに案内済みだが、実施報告はまだ受けていない：
-  1. https://vercel.com/new を開く（hutoru-kakeiboアカウントでログイン）
-  2. 「Import Git Repository」から `hutoru-kakeibo/shogyo-kentei-lab` を選択（一覧に出ない場合はGitHub App権限の追加が必要）
-  3. Framework Presetは自動でNext.jsと認識される想定。Root Directoryは`./`のまま
-  4. 環境変数は不要（空のままでよい）
-  5. Deployをクリック
-  - **次にこのプロジェクトを触るときは、まずVercel連携が完了したか・本番URLが発行されたかをユーザーに確認すること。**
+- **Vercel**: **連携完了（2026-09-08）**。本番URL: https://shogyo-kentei-lab.vercel.app/
+  - `main`ブランチへの`git push`で自動デプロイされる
+  - トップページ・科目詳細ページ（`/subjects/zensho-eiken`）とも本番で動作確認済み、コンソールエラーなし
 
 ### 6.2 デプロイ時の注意点
 
