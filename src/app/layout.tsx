@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { closing } from "@/lib/content";
+import { StickyCta } from "@/components/layout/StickyCta";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,8 +29,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full bg-brand-100/70">
         <div className="mx-auto min-h-dvh w-full max-w-md bg-canvas shadow-none md:my-6 md:min-h-0 md:rounded-[2rem] md:shadow-2xl md:shadow-black/10">
-          <div className="md:overflow-hidden md:rounded-[2rem]">{children}</div>
+          <div className="pb-24 md:overflow-hidden md:rounded-[2rem]">{children}</div>
         </div>
+        <StickyCta label={closing.ctaLabel} href="/apply" />
       </body>
     </html>
   );

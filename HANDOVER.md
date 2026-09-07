@@ -37,23 +37,30 @@ website/
 
 ### 2.1 セクション構成（`src/app/page.tsx`の並び順）
 
-1. `Hero.tsx` — ファーストビュー。ユーザー提供のヒーロー画像（`hero-visual.png`、文字入り）＋実績数値＋CTA
+2026年9月、旺文社「英検®カコモン」を参考に大幅リニューアル。参考サイトの文言・画像・商標は一切転用せず、カード意匠やセクションの型のみを参考にしている（モバイルファースト維持、ヘッダーナビは追加せず）。
+
+1. `Hero.tsx` — ファーストビュー。ユーザー提供のヒーロー画像（`hero-visual.png`、文字入り）＋実績数値＋バナー型CTA（`CtaBanner`）
 2. `TrialContent.tsx` — 「まずは無料で勉強してみよう！」トライアルコンテンツ3例＋「無料コンテンツ一覧」ボタン＋スクロール誘導
 3. `PainPoints.tsx` — 「こんなお悩みはありませんか？」課題喚起
-4. `SolutionIntro.tsx` — 「そんな方に…商業検定ラボが選ばれています！」
-5. `Features.tsx` — 「選ばれる理由」理由①②③（バッジがセクション背景とカードの境界をまたぐ意匠）
-6. `Testimonials.tsx` — 利用者の声（横スクロールカルーセル）
-7. `Pricing.tsx` — 料金プラン。「個別」（科目カード→詳細ページへ遷移）／「集団」（準備中表示）のタブ切り替え
-8. `Faq.tsx` — よくある質問（アコーディオン）
-9. `ClosingCta.tsx` — クロージングCTA
+4. `PointsOverview.tsx` — 「選ばれる理由」を王冠バッジ＋「POINT 0X」の開閉式カードで3件表示（旧`SolutionIntro.tsx`+`Features.tsx`を統合・置き換え）
+5. `PointHighlight.tsx` — チャット質問サポートを1本掘り下げる単発の帯セクション（イラスト枠＋吹き出し＋チェックリスト）
+6. `ComparisonTable.tsx` — 「無料コンテンツ」と「個別指導（有料）」の比較カード
+7. `Pricing.tsx` — 料金プラン。「個別」（科目カード→詳細ページへ遷移、「公開中」/「準備中」の角リボンバッジ付き）／「集団」（準備中表示）のタブ切り替え
+8. `Testimonials.tsx` — 利用者の声（横スクロールカルーセル＋ドットページネーション）
+9. `Faq.tsx` — よくある質問（丸型「Q」バッジ＋アコーディオン）
+10. `ClosingCta.tsx` — クロージングCTA（バナー型CTA）
+
+`StickyCta.tsx`（画面下部固定CTA）は`src/app/layout.tsx`に常時マウントし、全ページ共通で表示されるようになった（以前は未使用コンポーネントだった）。
 
 ### 2.2 UIパーツ（`src/components/ui/`）
 
 - `PopButton.tsx` — Funda風の「3Dポップボタン」（下に厚みシャドウ、押すと沈む）。`variant="primary"`（オレンジ）/`"secondary"`（白）
+- `CtaBanner.tsx` — 2行テキスト（eyebrow＋label）＋矢印アイコンの大型バナーCTA。Hero・ClosingCtaで使用
+- `RibbonHeading.tsx` — 旗・リボン形の装飾見出し（CSS clip-pathで実装、画像不要）。Pricing・ComparisonTableの見出しで使用
 - `SectionContainer.tsx` — セクション共通の背景色・余白。`background="white"|"gray"|"brand"|"brandDark"`
 - `Accordion.tsx` — FAQ・科目詳細ページの「トレーニング内容」で共用。`variant="light"|"dark"`
 - `FadeIn.tsx` — スクロール時のフェードイン（Framer Motion）
-- `ImagePlaceholder.tsx` — 画像未定箇所のグレーボックス（SolutionIntroの「サービス画面のスクリーンショット」で使用中）
+- `ImagePlaceholder.tsx` — 画像未定箇所のグレーボックス（`PointHighlight.tsx`の「講師とのチャットのイメージ」で使用中）
 
 ## 3. 未確定・プレースホルダーのコンテンツ（要差し替え）
 
@@ -72,7 +79,7 @@ website/
 | 合格プロフィール | 科目ごとに`successProfiles`で個別設定可能。**全商英検は空配列＝「準備中」表示**。他7科目は共通の架空プロフィール2件（`defaultSuccessProfiles`） | `individualSubjects[].successProfiles` |
 | トライアルコンテンツ3例 | 実際に体験できるツールへのリンクなし（デザインのみ） | `trial.items` |
 | 「無料コンテンツ一覧」ボタン | リンク先 `#free-content` は実在しないダミー | `TrialContent.tsx` |
-| SolutionIntro/Features/Hero内の画像プレースホルダー | 「サービス画面のスクリーンショット」「アプリ画面イメージ」はグレーボックスのまま | `SolutionIntro.tsx` |
+| PointHighlightの画像プレースホルダー | 「講師とのチャットのイメージ」はグレーボックスのまま | `PointHighlight.tsx` |
 | FAQ本文 | 一般的な想定Q&A、事実確認はされていない | `faqs` |
 
 ## 4. ハマりどころ・技術的知見

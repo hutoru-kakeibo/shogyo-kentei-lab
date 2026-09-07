@@ -1,6 +1,6 @@
 import { closing } from "@/lib/content";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { PopButton } from "@/components/ui/PopButton";
+import { CtaBanner } from "@/components/ui/CtaBanner";
 
 export function ClosingCta() {
   return (
@@ -16,9 +16,12 @@ export function ClosingCta() {
           {closing.subCopy}
         </p>
 
-        <PopButton href="#apply-form" fullWidth className="mt-7">
-          {closing.ctaLabel}
-        </PopButton>
+        <CtaBanner
+          href="#apply-form"
+          eyebrow={closing.ctaEyebrow}
+          label={closing.ctaLabel}
+          className="mt-7"
+        />
       </FadeIn>
     </section>
   );

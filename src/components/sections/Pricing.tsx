@@ -7,9 +7,12 @@ import {
   pricingModes,
   individualSubjects,
   pricingComingSoonMessage,
+  pricingAvailableBadge,
+  pricingUnavailableBadge,
   type PricingModeKey,
 } from "@/lib/content";
 import { SectionContainer } from "@/components/ui/SectionContainer";
+import { RibbonHeading } from "@/components/ui/RibbonHeading";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { PopButton } from "@/components/ui/PopButton";
 
@@ -20,7 +23,7 @@ export function Pricing() {
     <SectionContainer background="gray" id="pricing">
       <FadeIn>
         <p className="text-center text-xs font-bold text-brand-700">PRICE</p>
-        <h2 className="mt-1 text-center text-xl font-bold text-ink">料金プラン</h2>
+        <RibbonHeading className="mt-2">料金プラン</RibbonHeading>
       </FadeIn>
 
       <FadeIn delay={0.05}>
@@ -53,21 +56,26 @@ export function Pricing() {
                 <Link
                   key={subject.slug}
                   href={`/subjects/${subject.slug}`}
-                  className="flex items-center justify-between gap-1 rounded-2xl border border-gray-200 bg-white p-4 text-sm font-bold text-ink transition-colors active:bg-brand-50"
+                  className="relative flex flex-col gap-2 overflow-hidden rounded-2xl border-2 border-brand-500 bg-white p-4 pt-5 text-sm font-bold text-ink shadow-sm transition-colors active:bg-brand-50"
                 >
-                  {subject.name}
-                  <ChevronRight size={16} className="shrink-0 text-brand-500" />
+                  <span className="absolute top-0 left-0 rounded-br-lg bg-brand-500 px-2 py-0.5 text-[10px] font-bold text-white">
+                    {pricingAvailableBadge}
+                  </span>
+                  <span className="flex items-center justify-between gap-1">
+                    {subject.name}
+                    <ChevronRight size={16} className="shrink-0 text-brand-500" />
+                  </span>
                 </Link>
               ) : (
                 <div
                   key={subject.slug}
                   aria-disabled="true"
-                  className="flex flex-col items-start gap-1 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-sm font-bold text-gray-400"
+                  className="relative flex flex-col gap-2 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 p-4 pt-5 text-sm font-bold text-gray-400"
                 >
-                  {subject.name}
-                  <span className="rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-bold text-gray-500">
-                    準備中
+                  <span className="absolute top-0 left-0 rounded-br-lg bg-gray-300 px-2 py-0.5 text-[10px] font-bold text-white">
+                    {pricingUnavailableBadge}
                   </span>
+                  {subject.name}
                 </div>
               ),
             )}

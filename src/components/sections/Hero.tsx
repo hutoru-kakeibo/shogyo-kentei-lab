@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { hero } from "@/lib/content";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { PopButton } from "@/components/ui/PopButton";
+import { CtaBanner } from "@/components/ui/CtaBanner";
 
 export function Hero() {
   return (
@@ -34,9 +34,7 @@ export function Hero() {
       </FadeIn>
 
       <FadeIn delay={0.2}>
-        <PopButton href="#apply" fullWidth className="mt-7">
-          {hero.ctaLabel}
-        </PopButton>
+        <CtaBanner href="#apply" eyebrow={hero.ctaEyebrow} label={hero.ctaLabel} className="mt-7" />
       </FadeIn>
     </section>
   );

@@ -7,6 +7,7 @@ export const hero = {
     { label: "合格件数", value: "15件+" },
     { label: "検定合格率", value: "92%" },
   ],
+  ctaEyebrow: "まずは無料体験から",
   ctaLabel: "無料体験に申し込む",
 };
 
@@ -54,38 +55,53 @@ export const painPoints = [
   "独学だと、やり方が合っているのか不安なまま進めてしまう",
 ];
 
-export const solutionIntro = {
+export const pointsOverview = {
   lead: "そんな方に…",
   brandName: "商業検定ラボ",
-  tagline: "が選ばれています！",
-  screenshotLabel: "サービス画面のスクリーンショット",
+  tagline: "が選ばれる理由",
 };
-
-export const featuresHeadline = "選ばれる理由";
 
 export const features = [
   {
     icon: "Smartphone",
-    speechBubble: "学校、部活で\n時間がない…",
-    leadText: "オンライン授業で",
     headline: "いつでもどこでも\nお手軽スタート！",
     bullets: ["夜ご飯後の隙間時間にも", "ちょっとした待ち時間も無駄にならない"],
   },
   {
     icon: "Target",
-    speechBubble: "範囲が広すぎて\nどこから…？",
-    leadText: "過去問を徹底分析した",
     headline: "出るところだけを\n効率よく攻略！",
     bullets: ["頻出パターンだけを厳選", "遠回りせず得点力アップ"],
   },
   {
     icon: "MessageCircleQuestion",
-    speechBubble: "この塾なら\nではの魅力",
-    leadText: "講師はほとんど",
-    headline: "元商業高校生！",
+    headline: "元商業高校生の\n講師が指導！",
     bullets: ["苦しい経験を共有した先生が授業", "翌日には自信を持って授業に臨める"],
   },
-];
+] as const;
+
+export const pointHighlight = {
+  eyebrow: "元商業高校生の講師だから",
+  headline: "つまずいた瞬間に\nすぐ質問できる！",
+  body: "わからないところをそのままにしない。チャットでその日のうちに質問できるから、独学の不安を解消しながら進められます。",
+  bullets: [
+    "疑問はその場でチャットで質問",
+    "元商業高校生の講師が実体験を交えて回答",
+    "翌日の授業にも自信を持って臨める",
+  ],
+  imageLabel: "講師とのチャットのイメージ",
+};
+
+export const comparisonTable = {
+  heading: "無料コンテンツと個別指導、\nどう違う？",
+  freeLabel: "無料コンテンツ",
+  paidLabel: "個別指導（有料）",
+  rows: [
+    { item: "対象科目", free: "お試し3コンテンツのみ", paid: "選んだ検定科目を集中対策" },
+    { item: "学習範囲", free: "基礎トレーニングの一部", paid: "トレーニング内容に沿って全範囲" },
+    { item: "質問対応", free: "なし", paid: "チャットで質問し放題（追加 ¥5,000）" },
+    { item: "学習の進め方", free: "自分のペースのみ", paid: "スケジュールを講師と相談しながら伴走" },
+  ],
+};
 
 export const testimonials = [
   {
@@ -353,6 +369,9 @@ export type IndividualSubject = (typeof individualSubjects)[number];
 export const pricingComingSoonMessage =
   "集団クラスは只今準備中です。近日公開予定ですのでお楽しみに。";
 
+export const pricingAvailableBadge = "公開中";
+export const pricingUnavailableBadge = "準備中";
+
 // 個別科目の料金プラン（科目共通・時間制、利用期間の定めなし）
 export const courseTicketPricing = {
   courseLabel: "個別指導",
@@ -407,5 +426,6 @@ export const applyPage = {
 export const closing = {
   headline: "その一歩が、\n合格への最短ルートになる。",
   subCopy: "まずは無料体験で、自分に合った学び方を確かめてみませんか。",
+  ctaEyebrow: "今なら無料で体験できる",
   ctaLabel: "無料体験に申し込む",
 };

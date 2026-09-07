@@ -1,10 +1,11 @@
 import { Hero } from "@/components/sections/Hero";
 import { TrialContent } from "@/components/sections/TrialContent";
 import { PainPoints } from "@/components/sections/PainPoints";
-import { SolutionIntro } from "@/components/sections/SolutionIntro";
-import { Features } from "@/components/sections/Features";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { PointsOverview } from "@/components/sections/PointsOverview";
+import { PointHighlight } from "@/components/sections/PointHighlight";
+import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { Pricing } from "@/components/sections/Pricing";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 
@@ -14,10 +15,11 @@ export default function Home() {
       <Hero />
       <TrialContent />
       <PainPoints />
-      <SolutionIntro />
-      <Features />
-      <Testimonials />
+      <PointsOverview />
+      <PointHighlight />
+      <ComparisonTable />
       <Pricing />
+      <Testimonials />
       <Faq />
       <ClosingCta />
     </main>
